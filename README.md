@@ -12,13 +12,14 @@ This project explores customer transactional data to uncover patterns in spendin
 Customer-Behavior-Analysis/
 ├── Python_customerbehavior_code.ipynb          # Data cleaning & preparation
 ├── customerbehavior_sql.sql                    # SQL business queries (PostgreSQL)
+├── dataset.csv                                 # Raw dataset
 ├── PowerBI_Dashboard_Customerbehavior.pbix      # Interactive Power BI dashboard
+├── Customer_Behavior.png                        # Dashboard screenshot (used below)
 ├── Customer_Behavior_Analysis_Report.docx       # Full project report
 ├── Customer-Shopping-Behaviour-Analysis.pptx    # Presentation deck
+├── requirements.txt                            # Python dependencies
 └── README.md
 ```
-
-> Note: rename the actual files in the repo to match these names exactly (currently the notebook has a space instead of an underscore, and the .pbix is missing the "r" in "Power") so the structure above and the commands below actually work if someone clones the repo.
 
 ## Tools & Technologies
 
@@ -31,17 +32,14 @@ Customer-Behavior-Analysis/
 
 ## Dataset
 
-- Source: **[add the dataset link here — e.g. the Kaggle page]**
+- File: `dataset.csv` (included in this repo)
+- Source: **[add where the dataset came from — e.g. the Kaggle page]**
 - Rows: 3,900 | Columns: 18
 - Key fields: Age, Gender, Item Purchased, Category, Purchase Amount (USD), Shipping Type, Discount Applied, Subscription Status, Review Rating, Previous Purchases
 
 ## Dashboard Preview
 
-**[Add 1–2 screenshots of the Power BI dashboard here]** — most people reviewing this repo won't open a .pbix file, so this is the single highest-impact addition you can make.
-
-```
-![Dashboard overview](images/dashboard_overview.png)
-```
+![Dashboard overview](Customer_Behavior.png)
 
 ## Workflow
 
@@ -93,18 +91,31 @@ An interactive dashboard built on top of the PostgreSQL database with:
 - 80% of customers fall into the Loyal segment (>10 previous purchases)
 - Young Adults generate the highest total revenue ($62,143)
 
+## Business Recommendations
+
+These are opportunities the data points to, not outcomes this project produced — it's an analysis of a public dataset rather than a live business deployment.
+
+- **Close the subscription gap.** Non-subscribers outnumber subscribers 3:1 (~2,847 of 3,900 customers). Converting just 10% of them (~285 customers) at the current average purchase value of $59.76 works out to roughly $17,000 in incremental revenue from a single retention campaign — likely higher in practice, since subscribers typically spend more per order than non-subscribers.
+- **Protect margin on high-discount products.** The products with the highest discount usage rate (Q6) are the ones most exposed to margin erosion — worth checking those margins before running further promotions on them.
+- **Prioritize retention over acquisition.** With 80% of customers already in the Loyal segment, this looks like a retention-driven business; loyalty-program spend likely outperforms new-customer acquisition spend here.
+- **Investigate the gender revenue gap before acting on it.** Male customers generate roughly double the revenue of female customers. That's worth a follow-up look at category mix and average order value before it's treated as a marketing signal — a gap this size is more likely to reflect what's being bought than who's buying.
+
 ## How to Run
 
 1. Clone the repository
-2. Download the dataset from the source above and place it in the project folder
-3. Open `Python_customerbehavior_code.ipynb` in Jupyter and run all cells
+2. Install dependencies: `pip install -r requirements.txt`
+3. Open `Python_customerbehavior_code.ipynb` in Jupyter and run all cells (reads `dataset.csv`)
 4. Ensure PostgreSQL is running locally with a database named `customer_behavior`
 5. Update database credentials in the notebook if needed (use environment variables rather than hardcoding them, if you haven't already)
 6. Open `customerbehavior_sql.sql` in pgAdmin 4 and run queries
 7. Open `PowerBI_Dashboard_Customerbehavior.pbix` in Power BI Desktop
 
+## Requirements
+
+See `requirements.txt` (pandas, sqlalchemy, psycopg2-binary).
+
 ## Author
 
-Dimple
+Dimple Gupta
 Data Analytics Project | Python · SQL · Power BI
 
